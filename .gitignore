@@ -30,3 +30,7 @@
 
 # Debug files
 *.dSYM/
+
+# Compiled C sources (added by cxd4)
+*.asm
+*.s
