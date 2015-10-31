@@ -33,8 +33,9 @@ int main(void)
         }
         ++total;
         printf(
-            "Current win ratio:  %g percent\n\n",
-            100 * (double)wins / (double)total
+            "Current win ratio:  %g percent (%lu rounds)\n\n",
+            100 * (double)wins / (double)total,
+            (unsigned long)total
         );
     }
     return 0;
