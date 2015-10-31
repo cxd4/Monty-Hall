@@ -91,7 +91,7 @@ unsigned int winning_door(void)
 
 unsigned int hint_door(void)
 {
-    static unsigned char losing_doors[NUMBER_OF_DOORS - 1];
+    static unsigned int losing_doors[NUMBER_OF_DOORS - 1];
     unsigned int random_hint;
     register unsigned int i, j;
 
