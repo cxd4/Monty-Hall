@@ -99,12 +99,12 @@ unsigned int hint_door(void)
     for (i = 0; i < NUMBER_OF_DOORS; i++) {
         if (doors[i].has_prize)
             continue;
+        if (doors[i].currently_selected)
+            continue; /* Obviously, do not reveal what the player picked. */
         losing_doors[j++] = i;
     }
 
-    do {
-        random_hint = losing_doors[get_random_whole_number() % j];
-    } while (doors[random_hint].currently_selected);
+    random_hint = losing_doors[get_random_whole_number() % j];
     doors[random_hint].revealed = 1;
     show_doors();
     doors[random_hint].revealed = 0;
