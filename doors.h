@@ -5,6 +5,11 @@
 #define NUMBER_OF_DOORS         3
 #endif
 
+#include <limits.h>
+#if (NUMBER_OF_DOORS > UINT_MAX)
+#error (n) doors exceeds storage allocation limit for `unsigned int'.
+#endif
+
 typedef struct {
     unsigned int has_prize         :  1;
     unsigned int currently_selected:  1;
