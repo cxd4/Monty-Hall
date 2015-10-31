@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include "doors.h"
-#include "input.h"
 
 #include <stddef.h>
 size_t wins  = 0;
