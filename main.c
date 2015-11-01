@@ -1,5 +1,9 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "doors.h"
+
+#include <errno.h>
+#include <limits.h>
 
 #include <stddef.h>
 size_t wins  = 0;
@@ -9,10 +13,24 @@ static void round_execute(unsigned int door_number, int switching);
 
 int main(int argc, char* argv[])
 {
-    if (argc < 2)
-        for (;;)
-            round_execute(NUMBER_OF_DOORS, -1);
-    return 0;
+    unsigned long door_number;
+    long switching;
+
+    door_number = NUMBER_OF_DOORS; /* Invalidate constant door requests. */
+    switching = -1; /* Ask every time whether to switch--no automaticion. */
+
+    if (argc >= 2)
+        switching = strtol(argv[1], NULL, 0);
+    if (errno == ERANGE)
+        switching = -1;
+
+    if (argc >= 3)
+        door_number = strtoul(argv[2], NULL, 0);
+    if (errno == ERANGE || door_number > UINT_MAX)
+        door_number = NUMBER_OF_DOORS;
+
+    for (;;)
+        round_execute(door_number, switching);
 }
 
 static void round_execute(unsigned int door_number, int switching)
