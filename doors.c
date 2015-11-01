@@ -10,9 +10,10 @@ void set_doors(void)
     const unsigned int random_door = get_random_whole_number();
 
     for (i = 0; i < NUMBER_OF_DOORS; i++) {
-        doors[i].has_prize = 0;
-        doors[i].currently_selected = 0;
-        doors[i].revealed = 0;
+        doors[i].has_prize
+      = doors[i].currently_selected
+      = doors[i].revealed
+      = 0;
     }
     doors[random_door % NUMBER_OF_DOORS].has_prize = 1;
     return;
@@ -67,14 +68,12 @@ unsigned int get_door_number(void)
 
 unsigned int winning_door(void)
 {
-    unsigned int winner;
     register unsigned int i;
 
-    winner = ~0u;
     for (i = 0; i < NUMBER_OF_DOORS; i++)
         if (doors[i].has_prize)
-            winner = i;
-    return (winner);
+            return (i);
+    return (i);
 }
 
 unsigned int hint_door(void)
@@ -85,10 +84,8 @@ unsigned int hint_door(void)
 
     j = 0;
     for (i = 0; i < NUMBER_OF_DOORS; i++) {
-        if (doors[i].has_prize)
+        if (doors[i].has_prize || doors[i].currently_selected)
             continue;
-        if (doors[i].currently_selected)
-            continue; /* Obviously, do not reveal what the player picked. */
         losing_doors[j++] = i;
     }
 
