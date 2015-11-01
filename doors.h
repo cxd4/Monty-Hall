@@ -28,7 +28,6 @@ extern void reveal_all_doors(void);
  * game status queries
  */
 extern unsigned int get_door_number(void);
-extern unsigned int current_guess(void);
 extern unsigned int winning_door(void);
 extern unsigned int hint_door(void);
 

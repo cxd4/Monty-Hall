@@ -65,18 +65,6 @@ unsigned int get_door_number(void)
     return (door_number);
 }
 
-unsigned int current_guess(void)
-{
-    unsigned int selection;
-    register unsigned int i;
-
-    selection = ~0u;
-    for (i = 0; i < NUMBER_OF_DOORS; i++)
-        if (doors[i].currently_selected)
-            selection = i;
-    return (selection);
-}
-
 unsigned int winning_door(void)
 {
     unsigned int winner;

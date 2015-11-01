@@ -68,7 +68,7 @@ static void round_execute(unsigned int door_number, int switching)
     select_door(door_number);
 
     reveal_all_doors();
-    if (current_guess() == winning_door()) {
+    if (winning_door() == door_number) {
         ++wins;
         puts("You win the car.");
     } else {
