@@ -7,7 +7,7 @@
 
 #include <stddef.h>
 size_t wins  = 0;
-size_t total = 0;
+size_t total = 0, limit = 1;
 
 static void round_execute(unsigned int door_number, int switching);
 
@@ -20,17 +20,19 @@ int main(int argc, char* argv[])
     switching = -1; /* Ask every time whether to switch--no automaticion. */
 
     if (argc >= 2)
-        switching = strtol(argv[1], NULL, 0);
-    if (errno == ERANGE)
-        switching = -1;
+        limit = strtoul(argv[1], NULL, 0);
 
     if (argc >= 3)
-        door_number = strtoul(argv[2], NULL, 0);
+        switching = strtol(argv[2], NULL, 0);
+
+    if (argc >= 4)
+        door_number = strtoul(argv[3], NULL, 0);
     if (errno == ERANGE || door_number > UINT_MAX)
         door_number = NUMBER_OF_DOORS;
 
-    for (;;)
+    while (total++ < limit)
         round_execute(door_number, switching);
+    return 0;
 }
 
 static void round_execute(unsigned int door_number, int switching)
@@ -72,7 +74,6 @@ static void round_execute(unsigned int door_number, int switching)
     } else {
         puts("You picked a goat.  Too bad.");
     }
-    ++total;
     printf(
         "Current win ratio:  %g percent (%lu rounds)\n\n",
         100 * (double)wins / (double)total,
