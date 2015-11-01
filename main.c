@@ -28,6 +28,10 @@ int main(int argc, char* argv[])
     return 0;
 }
 
+static const char* win_or_lose[] = {
+    "You picked a goat.  Too bad.",
+    "You win the car!",
+};
 static void round_execute(unsigned int door_number, int switching)
 {
     unsigned int hint_number;
@@ -61,12 +65,10 @@ static void round_execute(unsigned int door_number, int switching)
     select_door(door_number);
 
     reveal_all_doors();
-    if (winning_door() == door_number) {
-        ++wins;
-        puts("You win the car.");
-    } else {
-        puts("You picked a goat.  Too bad.");
-    }
+    hint_number = (winning_door() == door_number) ? 1 : 0;
+    puts(win_or_lose[hint_number]);
+    wins += hint_number;
+
     printf(
         "Current win ratio:  %g percent (%lu rounds)\n\n",
         100 * (double)wins / (double)total,
