@@ -29,6 +29,9 @@ void select_door(unsigned int number)
     return;
 }
 
+static const char outcomes[][5] = {
+    "GOAT", "CAR",
+};
 void show_doors(void)
 {
     register unsigned int i;
@@ -36,7 +39,7 @@ void show_doors(void)
     for (i = 0; i < NUMBER_OF_DOORS; i++) {
         putchar('\t');
         if (doors[i].revealed)
-            printf(doors[i].has_prize ? "CAR" : "GOAT");
+            printf(outcomes[doors[i].has_prize]);
         else
             printf("#%u", i + 1);
     }
