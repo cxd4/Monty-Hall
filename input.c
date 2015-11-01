@@ -3,7 +3,6 @@
 
 #include <limits.h>
 #include <errno.h>
-#include <time.h>
 #include "input.h"
 
 char* get_string(void)
@@ -65,13 +64,9 @@ unsigned int get_whole_number(void)
 
 unsigned int get_random_whole_number(void)
 {
-    static unsigned int seed;
     unsigned int random_number;
 
-    if (seed == 0) { /* Only set once, or time might work against us. */
-        seed = (unsigned int)time(NULL);
-        srand(seed);
-    }
+ /* srand(time(NULL)); // Random selection seems even better without this. */
     random_number = (unsigned int)rand();
     return (random_number);
 }
