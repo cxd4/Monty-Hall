@@ -29,20 +29,18 @@ void select_door(unsigned int number)
     return;
 }
 
-static const char outcomes[][5] = {
-    "GOAT", "CAR",
+static const char outcomes[][6] = {
+    "\tGOAT", "\tCAR",
 };
 void show_doors(void)
 {
     register unsigned int i;
 
-    for (i = 0; i < NUMBER_OF_DOORS; i++) {
-        putchar('\t');
+    for (i = 0; i < NUMBER_OF_DOORS; i++)
         if (doors[i].revealed)
             printf(outcomes[doors[i].has_prize]);
         else
-            printf("#%u", i + 1);
-    }
+            printf("\t#%u", i + 1);
     putchar('\n');
     return;
 }
