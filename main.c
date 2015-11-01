@@ -2,9 +2,6 @@
 #include <stdlib.h>
 #include "doors.h"
 
-#include <errno.h>
-#include <limits.h>
-
 #include <stddef.h>
 size_t wins  = 0;
 size_t total = 0, limit = 1;
@@ -21,14 +18,10 @@ int main(int argc, char* argv[])
 
     if (argc >= 2)
         limit = strtoul(argv[1], NULL, 0);
-
     if (argc >= 3)
         switching = strtol(argv[2], NULL, 0);
-
     if (argc >= 4)
         door_number = strtoul(argv[3], NULL, 0);
-    if (errno == ERANGE || door_number > UINT_MAX)
-        door_number = NUMBER_OF_DOORS;
 
     while (total++ < limit)
         round_execute(door_number, switching);
