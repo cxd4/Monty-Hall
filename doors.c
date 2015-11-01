@@ -57,14 +57,11 @@ void reveal_all_doors(void)
 
 unsigned int get_door_number(void)
 {
-    unsigned int door_number;
-
-    door_number = get_whole_number();
-    if (door_number < 1 || door_number > NUMBER_OF_DOORS)
-        door_number = get_random_whole_number() % NUMBER_OF_DOORS;
-    else
-        door_number -= 1; /* zero-based door number, from 0 to (n - 1) */
-    return (door_number);
+/*
+ * User enters a one-based door number (from 1 to N max doors).
+ * Registerd door ID becomes zero-based.
+ */
+    return (get_whole_number() - 1);
 }
 
 unsigned int winning_door(void)

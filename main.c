@@ -53,8 +53,10 @@ static void round_execute(unsigned int door_number, int switching)
         door_number + 1, hint_number + 1
     );
     if (switching < 0) { /* Ask whether to switch. */
-        fputs("Which door is your final guess?  ", stdout);
-        door_number = get_door_number();
+        do {
+            fputs("Which door is your final guess?  ", stdout);
+            door_number = get_door_number();
+        } while (door_number >= NUMBER_OF_DOORS);
     } else if (switching == 0) {
      /* Skip asking for final answer; just go to revealing the prize. */
     } else { /* Skip asking; automatically switch to a remaining door. */
