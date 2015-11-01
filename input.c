@@ -65,10 +65,13 @@ unsigned int get_whole_number(void)
 
 unsigned int get_random_whole_number(void)
 {
+    static unsigned int seed;
     unsigned int random_number;
-    const unsigned int seed = (unsigned int)time(NULL);
 
-    srand(seed);
+    if (seed == 0) { /* Only set once, or time might work against us. */
+        seed = (unsigned int)time(NULL);
+        srand(seed);
+    }
     random_number = (unsigned int)rand();
     return (random_number);
 }
