@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 #include "doors.h"
 
 #include <stddef.h>
@@ -15,6 +16,7 @@ int main(int argc, char* argv[])
 
     door_number = NUMBER_OF_DOORS; /* Invalidate constant door requests. */
     switching = -1; /* Ask every time whether to switch--no automaticion. */
+    srand((unsigned int)time(NULL));
 
     if (argc >= 2)
         limit = strtoul(argv[1], NULL, 0);
