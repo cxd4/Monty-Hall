@@ -7,7 +7,7 @@
 
 #include <limits.h>
 #if (NUMBER_OF_DOORS > UINT_MAX)
-#error (n) doors exceeds storage allocation limit for `unsigned int'.
+#error (n) doors exceeds storage allocation limit for (unsigned int).
 #endif
 
 typedef struct {
