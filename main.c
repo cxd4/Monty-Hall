@@ -3,6 +3,15 @@
 #include <time.h>
 #include "doors.h"
 
+/*
+ * Apparently, the MSVC in WDK 7.1.0 is still too old to resist generating
+ * unused junk operations that achieve nothing when FP stuff is being done.
+ */
+#if defined(_MSC_VER) && defined(_WIN64)
+#include <emmintrin.h>
+extern __m128d _mm_cvtsi64_sd(__m128d, __int64); /* Older MSVC lacks this. */
+#endif
+
 #include <stddef.h>
 size_t wins, total;
 
@@ -37,6 +46,10 @@ static const char* win_or_lose[] = {
 };
 static void round_execute(unsigned long door_number, long switching)
 {
+#if defined(_MSC_VER) && defined(_WIN64)
+    __m128d numerator, denominator;
+#endif
+    double win_ratio;
     unsigned int hint_number;
 
  /* Randomly arrange what's behind all three doors. */
@@ -74,9 +87,15 @@ static void round_execute(unsigned long door_number, long switching)
     puts(win_or_lose[hint_number]);
     wins += hint_number;
 
+#if defined(_MSC_VER) && defined(_WIN64)
+    numerator   = _mm_cvtsi64_sd(_mm_setzero_pd(), 100 * wins);
+    denominator = _mm_cvtsi64_sd(_mm_setzero_pd(), total);
+    _mm_store_sd(&win_ratio, _mm_div_sd(numerator, denominator));
+#else
+    win_ratio = (double)(100 * wins) / total;
+#endif
     printf(
         "Current win ratio:  %g%% (%lu rounds)\n\n",
-        (double)(100 * wins) / total,
-        (unsigned long)total
+        win_ratio, (unsigned long)total
     );
 }
