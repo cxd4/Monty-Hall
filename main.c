@@ -10,6 +10,7 @@
 #if defined(_MSC_VER) && defined(_WIN64)
 #include <emmintrin.h>
 extern __m128d _mm_cvtsi64_sd(__m128d, __int64); /* Older MSVC lacks this. */
+extern double _mm_cvtsd_f64(__m128d);
 #endif
 
 #include <stddef.h>
@@ -90,7 +91,7 @@ static void round_execute(unsigned long door_number, long switching)
 #if defined(_MSC_VER) && defined(_WIN64)
     numerator   = _mm_cvtsi64_sd(_mm_setzero_pd(), 100 * wins);
     denominator = _mm_cvtsi64_sd(_mm_setzero_pd(), total);
-    _mm_store_sd(&win_ratio, _mm_div_sd(numerator, denominator));
+    win_ratio = _mm_cvtsd_f64(_mm_div_sd(numerator, denominator));
 #else
     win_ratio = (double)(100 * wins) / total;
 #endif
