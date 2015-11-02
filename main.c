@@ -52,7 +52,7 @@ static void round_execute(unsigned long door_number, long switching)
 
     hint_number = hint_door();
     printf(
-        "Before I reveal what's behind door %u, here's door %u.\n",
+        "Before I reveal what's behind door %lu, here's door %u.\n",
         door_number + 1, hint_number + 1
     );
     if (switching < 0) { /* Ask whether to switch. */
