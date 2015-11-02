@@ -4,8 +4,7 @@
 #include "doors.h"
 
 #include <stddef.h>
-size_t wins  = 0;
-size_t total = 0, limit = 1;
+size_t wins, total;
 
 static void round_execute(unsigned int door_number, int switching);
 
@@ -13,7 +12,9 @@ int main(int argc, char* argv[])
 {
     unsigned long door_number;
     long switching;
+    register size_t limit;
 
+    limit = 1;
     door_number = NUMBER_OF_DOORS; /* Invalidate constant door requests. */
     switching = -1; /* Ask every time whether to switch--no automaticion. */
     srand((unsigned int)time(NULL));
