@@ -57,7 +57,7 @@ static void round_execute(unsigned int door_number, int switching)
     );
     if (switching < 0) { /* Ask whether to switch. */
         do {
-            fputs("Which door is your final guess?  ", stdout);
+            printf("Which door is your final guess?  ");
             door_number = get_door_number();
         } while (door_number >= NUMBER_OF_DOORS);
     } else if (switching == 0) {
