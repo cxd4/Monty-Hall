@@ -6,7 +6,7 @@
 #include <stddef.h>
 size_t wins, total;
 
-static void round_execute(unsigned int door_number, int switching);
+static void round_execute(unsigned long door_number, long switching);
 
 int main(int argc, char* argv[])
 {
@@ -35,7 +35,7 @@ static const char* win_or_lose[] = {
     "You picked a goat.  Too bad.",
     "You win the car!",
 };
-static void round_execute(unsigned int door_number, int switching)
+static void round_execute(unsigned long door_number, long switching)
 {
     unsigned int hint_number;
 
