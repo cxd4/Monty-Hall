@@ -76,7 +76,7 @@ static void round_execute(unsigned long door_number, long switching)
 
     printf(
         "Current win ratio:  %g%% (%lu rounds)\n\n",
-        100. * wins / total,
+        (double)(100 * wins) / total,
         (unsigned long)total
     );
 }
